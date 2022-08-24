@@ -10,7 +10,7 @@ Install packages:
 npm i
 ```
 
-Start the calculator using the command below::
+Start the calculator using the command below:
 ```bash
 npm run run
 ```
