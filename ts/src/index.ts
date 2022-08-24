@@ -43,7 +43,7 @@ async function askNumbers() {
 }
 
 (async function main() {
-  log(`Welcome to calculator in ${chalkin.bgYellow("JS")}`);
+  log(`Welcome to calculator in ${chalkin.bgBlue("TS")}`);
   log(`Before you use our ${chalkin.underline("calculator")}.\n`);
 
   // Introduction
