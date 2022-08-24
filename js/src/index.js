@@ -9,7 +9,7 @@ async function intro() {
   let name = await inquirer.prompt({
     name: "playerName",
     type: "input",
-    message: "What is you name ?",
+    message: "What is your name ?",
     default() {
       return "User";
     },
@@ -37,7 +37,7 @@ async function askNumbers() {
   let num1 = await inquirer.prompt({
     name: "number1",
     type: "number",
-    message: "Enter the first number ?",
+    message: "Enter the first number ->",
     default() {
       return 1;
     },
@@ -47,7 +47,7 @@ async function askNumbers() {
   let num2 = await inquirer.prompt({
     name: "number2",
     type: "number",
-    message: "Enter the second number ?",
+    message: "Enter the second number ->",
     default() {
       return 1;
     },
