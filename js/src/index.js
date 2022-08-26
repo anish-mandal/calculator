@@ -22,7 +22,7 @@ async function operation() {
   let operator = await inquirer.prompt({
     name: "name",
     type: "list",
-    message: "What Operation you would wish to do ?",
+    message: "What Operation you would like to do ?",
     choices: ["Addition", "Substraction", "Multiplication", "Division"],
     default() {
       return "Addition";
@@ -37,7 +37,7 @@ async function askNumbers() {
   let num1 = await inquirer.prompt({
     name: "number1",
     type: "number",
-    message: "Enter the first number ->",
+    message: "Enter the first number :",
     default() {
       return 1;
     },
@@ -47,7 +47,7 @@ async function askNumbers() {
   let num2 = await inquirer.prompt({
     name: "number2",
     type: "number",
-    message: "Enter the second number ->",
+    message: "Enter the second number :",
     default() {
       return 1;
     },
@@ -59,7 +59,7 @@ async function askNumbers() {
 
 (async function main() {
   log(`Welcome to calculator in ${chalk.bgYellow("JS")}`);
-  log(`Before you use our ${chalk.underline("calculator")}.\n`);
+  log(`Before you use the ${chalk.underline("calculator")}.\n`);
 
   // Introduction
   await intro();
@@ -81,5 +81,5 @@ async function askNumbers() {
     log(`Result: ${num1} / ${num2} = ${num1 / num2}\n`);
   }
 
-  log(`Thanks for using my calculator.`);
+  log(`Thanks for using the calculator.`);
 })();
