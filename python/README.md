@@ -4,7 +4,7 @@
 
 Dependency manager used in this project is [Poetry](https://python-poetry.org/)
 
-This calculator requies python3 and poetry.
+This calculator requies python and poetry.
 
 Install packages:
 
