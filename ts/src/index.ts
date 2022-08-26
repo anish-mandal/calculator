@@ -9,7 +9,7 @@ const chalkin = new Chalkin();
 
 async function intro() {
   let name = await inquirer.input({
-    message: "What is you name ?",
+    message: "What is your name ?",
     default: "user",
   });
   name = capitalizeFirstLetter(name);
@@ -18,7 +18,7 @@ async function intro() {
 
 async function operation() {
   const operator = await inquirer.select({
-    message: "What Operation you would wish to do ?",
+    message: "What Operation you would like to do ?",
     options: ["Addition", "Substraction", "Multiplication", "Division"],
     default: "Addition",
   });
@@ -28,13 +28,13 @@ async function operation() {
 
 async function askNumbers() {
   let num1 = await inquirer.input({
-    message: "Enter the first number ?",
+    message: "Enter the first number :",
     default: "1",
   });
   num1 = parseInt(num1);
 
   let num2 = await inquirer.input({
-    message: "Enter the second number ?",
+    message: "Enter the second number :",
     default: "1",
   });
   num2 = parseInt(num2);
@@ -44,7 +44,7 @@ async function askNumbers() {
 
 (async function main() {
   log(`Welcome to calculator in ${chalkin.bgBlue("TS")}`);
-  log(`Before you use our ${chalkin.underline("calculator")}.\n`);
+  log(`Before you use the ${chalkin.underline("calculator")}.\n`);
 
   // Introduction
   await intro();
@@ -66,5 +66,5 @@ async function askNumbers() {
     log(`Result: ${num1} / ${num2} = ${num1 / num2}\n`);
   }
 
-  log(`Thanks for using my calculator.`);
+  log(`Thanks for using the calculator.`);
 })();
