@@ -1,85 +1,78 @@
 #! /usr/bin/env node
-import inquirer from "inquirer";
-import chalk from "chalk";
-import { capitalizeFirstLetter } from "./utils.js";
+import { createInterface } from "node:readline/promises";
+import { stdin, stdout } from "node:process";
 
 const log = console.log;
 
-async function intro() {
-  let name = await inquirer.prompt({
-    name: "playerName",
-    type: "input",
-    message: "What is your name ?",
-    default() {
-      return "User";
-    },
-  });
-  name = capitalizeFirstLetter(name.playerName);
-  log(`Hi, ${chalk.underline(name)}!\n`);
-}
-
-async function operation() {
-  let operator = await inquirer.prompt({
-    name: "name",
-    type: "list",
-    message: "What Operation you would like to do ?",
-    choices: ["Addition", "Substraction", "Multiplication", "Division"],
-    default() {
-      return "Addition";
-    },
+async function question(str) {
+  const read = createInterface({
+    input: stdin,
+    output: stdout,
   });
 
-  operator = operator.name;
-  return operator;
-}
-
-async function askNumbers() {
-  let num1 = await inquirer.prompt({
-    name: "number1",
-    type: "number",
-    message: "Enter the first number :",
-    default() {
-      return 1;
-    },
-  });
-  num1 = num1.number1;
-
-  let num2 = await inquirer.prompt({
-    name: "number2",
-    type: "number",
-    message: "Enter the second number :",
-    default() {
-      return 1;
-    },
-  });
-  num2 = num2.number2;
-
-  return { num1, num2 };
+  const answer = await read.question(str);
+  read.close();
+  return answer;
 }
 
 (async function main() {
-  log(`Welcome to calculator in ${chalk.bgYellow("JS")}`);
-  log(`Before you use the ${chalk.underline("calculator")}.\n`);
+  let answer;
+  let number1;
+  let number2;
 
-  // Introduction
-  await intro();
+  log("Welcome to 2 numbers adding calculator :)");
 
-  // What operation?
-  let operator = await operation();
+  log(`Please select the number in () for the required operation to be done:
+(1) Addition
+(2) Substraction
+(3) Multiply
+(4) Division
+`);
 
-  // Numbers
-  let { num1, num2 } = await askNumbers();
+  while (true) {
+    answer = await question("Enter the option number: ");
 
-  // Calculation
-  if (operator === "Addition") {
-    log(`Result: ${num1} + ${num2} = ${num1 + num2}\n`);
-  } else if (operator === "Substraction") {
-    log(`Result: ${num1} - ${num2} = ${num1 - num2}\n`);
-  } else if (operator === "Multiplication") {
-    log(`Result: ${num1} * ${num2} = ${num1 * num2}\n`);
-  } else if (operator === "Division") {
-    log(`Result: ${num1} / ${num2} = ${num1 / num2}\n`);
+    if (["1", "2", "3", "4"].includes(answer)) {
+      break;
+    }
+
+    log("Please enter the correct value :(");
   }
 
-  log(`Thanks for using the calculator.`);
+  while (true) {
+    number1 = await question("Enter the 1st number: ");
+
+    try {
+      number1 = parseInt(number1);
+      break;
+    } catch {
+      log("Please enter a valid number.");
+    }
+  }
+
+  while (true) {
+    number2 = await question("Enter the 2nd number: ");
+
+    try {
+      number2 = parseInt(number2);
+      break;
+    } catch {
+      log("Please enter a valid number.");
+    }
+  }
+
+  switch (answer) {
+    case "1":
+      log(`${number1} + ${number2} = ${number1 + number2}`);
+      break;
+    case "2":
+      log(`${number1} - ${number2} = ${number1 - number2}`);
+      break;
+    case "3":
+      log(`${number1} * ${number2} = ${number1 * number2}`);
+      break;
+    case "4":
+      log(`${number1} / ${number2} = ${number1 / number2}`);
+      break;
+  }
 })();
