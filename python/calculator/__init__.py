@@ -1,71 +1,57 @@
-import inquirer
-from colors import FONT_STYLE
-import os
-os.system("")  # enables ansi escape characters in terminal
+#! /usr/bin/env python
+p = print
 
 
-def main() -> None:
-    print("Welcome to calculator in " +
-          FONT_STYLE["BLUE"] +
-          "py" +  # py in blue
-          FONT_STYLE["END"] +
-          FONT_STYLE["YELLOW"] +
-          "thon" +  # thon in yellow
-          FONT_STYLE["END"])
+def main():
+    answer, number1, number2 = None, None, None
 
-    print("Before getting started with the calculator\n")
+    p("Welcome to 2 numbers adding calculator :)")
 
-    # Intro
-    name = inquirer.text(message="What is your name ?")
-    if (name == ''):
-        print("Hello, User")
-    else:
-        print("Hello, " + FONT_STYLE["UNDERLINE"] +
-              name.capitalize().strip() + FONT_STYLE["END"])
+    p(
+        """Please select the number in () for the required operation to be done:
+(1) Addition
+(2) Subtraction
+(3) Multiplication
+(4) Division
+      """
+    )
 
-    # operation
-    operator = ["Addition", "Substraction", "Multiplication", "Division"]
-    operation = inquirer.list_input(
-        message="What operation you would like to do ?",
-        choices=operator)
+    while True:
+        answer = input("Enter the option number: ")
 
-    # asking numbers
-    while (True):
+        if answer in ["1", "2", "3", "4"]:
+            break
+
+        p("Please enter the correct value :(")
+
+    while True:
         try:
-            num1 = inquirer.text(message="Enter your first number")
-            num1 = int(num1)
+            number1 = int(input("Enter the 1st number: "))
             break
         except:
-            print("Only numbers are allowed")
-            continue
+            p("Please enter a valid number.")
 
-    while (True):
+    while True:
         try:
-            num2 = inquirer.text(message="Enter your second number")
-            num2 = int(num2)
+            number2 = int(input("Enter the 2st number: "))
+
+            if answer == "4":
+                number1 / number2
+
             break
         except:
-            print("Only numbers are allowed")
-            continue
+            p("Please enter a valid number.")
 
-    # conditions to handle the operation and result
-    if operation == operator[0]:
-        print(f"Result: {num1} + {num2} = {num1 + num2}")
-    elif operation == operator[1]:
-        print(f"Result: {num1} - {num2} = {num1 - num2}")
-    elif operation == operator[2]:
-        print(f"Result: {num1} * {num2} = {num1 * num2}")
-    elif operation == operator[3]:
-        if num2 == 0:
-            print("Anything divided by zero will result in undefined")
-            print("\nThanks for using the calculator")
-
-            return
-        print(f"Result: {num1} / {num2} = {num1 / num2}")
-
-    print("\nThanks for using the calculator")
+    match answer:
+        case "1":
+            p(f"{number1} + {number2} = {number1 + number2}")
+        case "2":
+            p(f"{number1} - {number2} = {number1 - number2}")
+        case "3":
+            p(f"{number1} * {number2} = {number1 * number2}")
+        case "4":
+            p(f"{number1} / {number2} = {number1 / number2}")
 
 
-# execute main
 if __name__ == "__main__":
     main()
