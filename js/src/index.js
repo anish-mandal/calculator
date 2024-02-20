@@ -24,8 +24,8 @@ async function question(str) {
 
   log(`Please select the number in () for the required operation to be done:
 (1) Addition
-(2) Substraction
-(3) Multiply
+(2) Subtraction
+(3) Multiplication
 (4) Division
 `);
 
