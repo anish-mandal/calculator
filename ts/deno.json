@@ -4,6 +4,6 @@
     "strict": true
   },
   "tasks": {
-    "run": "deno run --unstable --allow-env ./src/index.ts"
+    "run": "deno run ./src/index.ts"
   }
 }

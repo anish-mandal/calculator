@@ -1,70 +1,63 @@
 #!/usr/bin/env -S deno run
 
-import * as inquirer from "https://deno.land/x/inquirer@v0.0.4/mod.ts";
-import { capitalizeFirstLetter } from "./utils.ts";
-import Chalkin from "https://deno.land/x/chalkin@v0.1.3/chalkin.ts";
-
 const log = console.log;
-const chalkin = new Chalkin();
 
-async function intro() {
-  let name = await inquirer.input({
-    message: "What is your name ?",
-    default: "user",
-  });
-  name = capitalizeFirstLetter(name);
-  log(`Hi, ${chalkin.underline(name)}!\n`);
-}
+function takeNumber(no: string) {
+  let input;
 
-async function operation() {
-  const operator = await inquirer.select({
-    message: "What Operation you would like to do ?",
-    options: ["Addition", "Substraction", "Multiplication", "Division"],
-    default: "Addition",
-  });
+  while (true) {
+    input = prompt(`Enter the ${no} number:`)!;
 
-  return operator;
-}
-
-async function askNumbers() {
-  let num1 = await inquirer.input({
-    message: "Enter the first number :",
-    default: "1",
-  });
-  num1 = parseInt(num1);
-
-  let num2 = await inquirer.input({
-    message: "Enter the second number :",
-    default: "1",
-  });
-  num2 = parseInt(num2);
-
-  return { num1, num2 };
-}
-
-(async function main() {
-  log(`Welcome to calculator in ${chalkin.bgBlue("TS")}`);
-  log(`Before you use the ${chalkin.underline("calculator")}.\n`);
-
-  // Introduction
-  await intro();
-
-  // What operation?
-  const operator = await operation();
-
-  // Numbers
-  const { num1, num2 } = await askNumbers();
-
-  // Calculation
-  if (operator === "Addition") {
-    log(`Result: ${num1} + ${num2} = ${num1 + num2}\n`);
-  } else if (operator === "Substraction") {
-    log(`Result: ${num1} - ${num2} = ${num1 - num2}\n`);
-  } else if (operator === "Multiplication") {
-    log(`Result: ${num1} * ${num2} = ${num1 * num2}\n`);
-  } else if (operator === "Division") {
-    log(`Result: ${num1} / ${num2} = ${num1 / num2}\n`);
+    try {
+      input = parseInt(input);
+      break;
+    } catch {
+      log("Please enter a valid number.");
+    }
   }
 
-  log(`Thanks for using the calculator.`);
+  return input;
+}
+
+(function main() {
+  let answer;
+  let number1 = 0;
+  let number2 = 0;
+
+  log("Welcome to 2 numbers adding calculator :)");
+
+  log(`Please select the number in () for the required operation to be done:
+(1) Addition
+(2) Subtraction
+(3) Multiplication
+(4) Division
+`);
+
+  while (true) {
+    answer = prompt("Enter the option number:")!;
+
+    if (["1", "2", "3", "4"].includes(answer)) {
+      break;
+    }
+
+    log("Please enter the correct value :(");
+  }
+
+  number1 = takeNumber("1st");
+  number2 = takeNumber("2nd");
+
+  switch (answer) {
+    case "1":
+      log(`${number1} + ${number2} = ${number1 + number2}`);
+      break;
+    case "2":
+      log(`${number1} - ${number2} = ${number1 - number2}`);
+      break;
+    case "3":
+      log(`${number1} * ${number2} = ${number1 * number2}`);
+      break;
+    case "4":
+      log(`${number1} / ${number2} = ${number1 / number2}`);
+      break;
+  }
 })();
