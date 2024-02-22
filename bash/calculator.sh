@@ -44,10 +44,10 @@ while true; do
 done
 
 case $answer in
-"1") echo -e "${number1} + ${number2} = $(($number1 + $number2))" ;;
-"2") echo -e "${number1} - ${number2} = $(($number1 - $number2))" ;;
-"3") echo -e "${number1} * ${number2} = $(($number1 * $number2))" ;;
-"4") echo -e "${number1} / ${number2} = $(($number1 / $number2))" ;;
+"1") echo -e "${number1} + ${number2} = $(echo "scale=4; $number1 + $number2" | bc -l)" ;;
+"2") echo -e "${number1} - ${number2} = $(echo "scale=4; $number1 - $number2" | bc -l)" ;;
+"3") echo -e "${number1} * ${number2} = $(echo "scale=4; $number1 * $number2" | bc -l)" ;;
+"4") echo -e "${number1} / ${number2} = $(echo "scale=4; $number1 / $number2" | bc -l)" ;;
 *) echo -e "Error: No operation happened" ;;
 
 esac
